@@ -1,0 +1,19 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "testRunner": "mocha",
+  "reporters": ["clear-text", "progress", "html"],
+  "mutate": ["src/utils/personal_cabinet_money.js"],
+  "coverageAnalysis": "off",
+  "incremental": true,
+  "incrementalFile": ".stryker-tmp/incremental.json",
+  "thresholds": {
+    "high": 80,
+    "low": 70,
+    "break": 80
+  },
+  "timeoutMS": 30000,
+  "concurrency": 2,
+  "mochaOptions": {
+    "spec": ["mutation-tests/**/*.test.js"]
+  }
+}

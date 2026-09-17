@@ -1,7 +1,7 @@
 <script setup>
-import PersonalCabinetPlaceholder from './components/personal_cabinet_placeholder.vue'
+import PersonalCabinetFlow from './components/personal_cabinet_flow.vue'
 </script>
 
 <template>
-  <PersonalCabinetPlaceholder />
+  <PersonalCabinetFlow />
 </template>

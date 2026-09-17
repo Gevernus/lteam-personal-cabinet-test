@@ -1,4 +1,4 @@
-import { render, screen, within } from '@testing-library/vue'
+import { render, screen, waitFor, within } from '@testing-library/vue'
 import userEvent from '@testing-library/user-event'
 import { describe, expect, it, vi } from 'vitest'
 import App from '../src/App.vue'
@@ -20,6 +20,14 @@ describe('commission flow contract', () => {
     expect(within(dialog).getByText('Firma digitale')).toBeVisible()
     expect(within(dialog).getByText('12,13 €')).toBeVisible()
     expect(within(dialog).getByText('2. COMMISSIONE')).toHaveAttribute('aria-current', 'step')
+  })
+
+  // Initial focus must enter the modal instead of remaining in the inert dashboard.
+  it('moves initial focus to the dialog title', async () => {
+    renderFlow()
+
+    const title = screen.getByRole('heading', { name: 'Commissione da versare' })
+    await waitFor(() => expect(title).toHaveFocus())
   })
 
   // CTA wiring can regress while both panels still render correctly in isolation.
@@ -116,6 +124,21 @@ describe('commission flow contract', () => {
 
     expect(screen.getByRole('status')).toHaveTextContent('Copia manualmente: UNCRITMMXXX')
     expect(screen.getByRole('dialog', { name: 'Coordinate di pagamento' })).toBeVisible()
+  })
+
+  // Missing Clipboard API is common on insecure origins and must use the same fallback.
+  it('handles browsers without a Clipboard API', async () => {
+    const user = userEvent.setup()
+    Object.defineProperty(navigator, 'clipboard', {
+      configurable: true,
+      value: undefined,
+    })
+    renderFlow()
+    await user.click(screen.getByRole('button', { name: 'Vai alle coordinate' }))
+
+    await user.click(screen.getByRole('button', { name: 'Copia importo' }))
+
+    expect(screen.getByRole('status')).toHaveTextContent('Copia manualmente: 37 €')
   })
 
   // Confirmation must leave the user with an explicit outcome, not a dead button.

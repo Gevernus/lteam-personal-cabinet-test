@@ -25,6 +25,18 @@ describe('commission flow accessibility', () => {
     expect(results.violations).toEqual([])
   })
 
+  // The success state must remain accessible after replacing the entire dialog body.
+  it('has no automated accessibility violations on confirmation', async () => {
+    const user = userEvent.setup()
+    const { container } = render(App)
+    await user.click(screen.getByRole('button', { name: 'Vai alle coordinate' }))
+    await user.click(screen.getByRole('button', { name: 'Conferma pagamento' }))
+
+    const results = await axe(container)
+
+    expect(results.violations).toEqual([])
+  })
+
   // Icon-only controls without names disappear from a screen reader's action list.
   it('exposes names for every commission action', () => {
     render(App)

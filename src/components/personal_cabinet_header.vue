@@ -28,7 +28,7 @@ const links = [
         </a>
       </nav>
       <a class="personal-cabinet-header__support" href="mailto:assistenza@example.com">
-        <PersonalCabinetIcon name="headset" :size="17" />
+        <PersonalCabinetIcon name="chat" :size="18" />
         <span>ASSISTENZA</span>
         <b aria-label="4 nuove notifiche">4</b>
       </a>

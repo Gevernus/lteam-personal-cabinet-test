@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <aside class="personal-cabinet-notice" :class="{ 'personal-cabinet-notice--compact': compact }">
-    <PersonalCabinetIcon name="help" :size="20" />
+    <PersonalCabinetIcon name="help-bold" :size="20" />
     <p><slot /></p>
   </aside>
 </template>

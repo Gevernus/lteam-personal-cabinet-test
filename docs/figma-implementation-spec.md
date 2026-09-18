@@ -65,7 +65,8 @@ Mobile uses a `16px` Figma inset, `20px` vertical rhythm and the same `23px` rad
 
 - Avanti mark is the exact two-path Figma vector.
 - Marco Rossi avatar is the Figma image asset, stored locally at `src/assets/marco_rossi_avatar.jpg`.
-- UI icons remain semantic SVG components and match the source dimensions/stroke widths.
+- Flow icons (`arrow-left/right`, `close`, `help`, `credit-card`, `copy`) reproduce the Figma vector geometry, dimensions and stroke widths; the Figma question mark is rendered as the original font glyph rather than an approximate path.
+- Header assistance uses the source speech-bubble motif instead of the earlier headset substitute.
 
 ## Verification
 

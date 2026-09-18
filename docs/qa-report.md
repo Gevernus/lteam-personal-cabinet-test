@@ -13,10 +13,10 @@
 | Accessibility | 3 states, 0 axe violations |
 | Production build | passed |
 | Runtime dependency audit | 0 vulnerabilities |
-| Statement coverage | 98.87% |
-| Branch coverage | 91.81% |
-| Function coverage | 97.50% |
-| Line coverage | 98.69% |
+| Statement coverage | 98.91% |
+| Branch coverage | 89.50% |
+| Function coverage | 97.56% |
+| Line coverage | 98.73% |
 | Mutation score | 100% — 56/56 killed |
 | Mutation test strength | 100% |
 
@@ -26,8 +26,8 @@
 
 | State | Desktop SSIM | Mobile SSIM |
 |---|---:|---:|
-| Commissione | 0.958 | 0.921 |
-| Coordinate | 0.947 | 0.894 |
+| Commissione | 0.961 | 0.926 |
+| Coordinate | 0.949 | 0.898 |
 
 Outer modal geometry совпадает с Figma по `x/y/width/height` во всех четырёх reference frames. Diff/overlay артефакты находятся в `comparison/`.
 

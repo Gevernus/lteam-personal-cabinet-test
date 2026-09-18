@@ -69,6 +69,7 @@ docs/               спека, review и интеграция
 - [Code review](docs/review.md)
 - [Laravel integration](docs/laravel-integration.md)
 - [QA report](docs/qa-report.md)
+- [Figma / implementation pixel comparison](comparison/README.md)
 - [Figma](https://www.figma.com/design/uSUtDWU8Rc4fL1CsOfvtRd/Personal-Cabinet-Copy?node-id=0-1)
 
 ## Vercel

@@ -26,36 +26,42 @@ const steps = ['IBAN', 'COMMISSIONE', 'COORDINATE']
 <style scoped>
 .personal-cabinet-stepper {
   display: grid;
+  height: 29px;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  border: 1px solid var(--pc-line);
-  border-radius: 4px;
-  background: #ffffff;
+  gap: 2px;
   grid-template-columns: repeat(3, 1fr);
   list-style: none;
 }
 
 .personal-cabinet-stepper li {
   display: grid;
-  min-height: 30px;
+  height: 29px;
   place-items: center;
+  background: #f4f4f5;
   color: var(--pc-ink-muted);
-  font-size: 8px;
-  font-weight: 750;
-  letter-spacing: 0.05em;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
   white-space: nowrap;
 }
 
 .personal-cabinet-stepper__step--current {
-  background: var(--pc-primary);
+  background: var(--pc-primary) !important;
   color: #ffffff !important;
+  font-weight: 600 !important;
 }
 
-@media (max-width: 479px) {
+@media (max-width: 767px) {
+  .personal-cabinet-stepper {
+    gap: 0;
+  }
+}
+
+@media (max-width: 359px) {
   .personal-cabinet-stepper li {
-    min-height: 27px;
-    font-size: 7px;
+    font-size: 9px;
   }
 }
 </style>

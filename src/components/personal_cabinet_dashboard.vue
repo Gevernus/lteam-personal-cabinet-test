@@ -3,9 +3,9 @@ import { ref } from 'vue'
 import PersonalCabinetBalanceCard from './personal_cabinet_balance_card.vue'
 import PersonalCabinetChecklist from './personal_cabinet_checklist.vue'
 import PersonalCabinetHeader from './personal_cabinet_header.vue'
-import PersonalCabinetMobileNavigation from './personal_cabinet_mobile_navigation.vue'
 import PersonalCabinetProgressCard from './personal_cabinet_progress_card.vue'
 import PersonalCabinetUserSummary from './personal_cabinet_user_summary.vue'
+import PersonalCabinetWithdrawalBanner from './personal_cabinet_withdrawal_banner.vue'
 
 const emit = defineEmits(['open-commission'])
 const balanceCard = ref(null)
@@ -30,71 +30,95 @@ defineExpose({ focusLauncher })
         <PersonalCabinetChecklist />
       </div>
       <section class="personal-cabinet-dashboard__personal" aria-label="Dati personali">
-        <p>DATI PERSONALI</p>
+        <p>Dati personali</p>
         <dl>
-          <div><dt>Cognome</dt><dd>Rossi</dd></div>
-          <div><dt>Nome</dt><dd>Marco</dd></div>
+          <div><dt>Cognome</dt><dd>Intesa Sanpaolo S.p.A.</dd></div>
+          <div><dt>Nome</dt><dd>Marco Rossi</dd></div>
         </dl>
       </section>
+      <PersonalCabinetWithdrawalBanner class="personal-cabinet-dashboard__withdrawal" />
     </main>
-    <PersonalCabinetMobileNavigation />
   </div>
 </template>
 
 <style scoped>
 .personal-cabinet-dashboard {
-  min-height: 100vh;
-  background: #f5f7f7;
+  min-height: 910px;
+  background: #f8fafb;
 }
 
 .personal-cabinet-dashboard__main {
-  display: grid;
-  width: min(100% - 48px, 1240px);
-  margin-inline: auto;
-  padding-block: 20px 90px;
-  gap: 18px;
+  position: relative;
+  width: 100%;
+  height: 799px;
 }
 
 .personal-cabinet-dashboard__breadcrumb {
+  position: absolute;
+  top: 21.5px;
+  right: calc(50% - 648px);
   color: var(--pc-ink-muted);
-  font-size: 10px;
+  font-size: 14px;
+  line-height: 17px;
   text-align: right;
 }
 
 .personal-cabinet-dashboard__breadcrumb span {
-  padding-inline: 7px;
+  padding-inline: 8px;
 }
 
 .personal-cabinet-dashboard__breadcrumb strong {
   color: var(--pc-ink);
 }
 
+.personal-cabinet-dashboard__main > :deep(.personal-cabinet-user-summary) {
+  position: absolute;
+  top: 10px;
+  left: calc(50% - 648px);
+  width: 200px;
+}
+
+.personal-cabinet-dashboard__main > :deep(.personal-cabinet-progress-card) {
+  position: absolute;
+  top: 80px;
+  left: calc(50% - 648px);
+  width: 792px;
+  height: 130px;
+}
+
 .personal-cabinet-dashboard__grid {
+  position: absolute;
+  top: 242px;
+  left: calc(50% - 648px);
   display: grid;
-  gap: 18px;
-  grid-template-columns: minmax(300px, 0.9fr) minmax(420px, 1.35fr);
+  width: 1296px;
+  gap: 40px;
+  grid-template-columns: 792px 464px;
 }
 
 .personal-cabinet-dashboard__personal {
-  display: none;
-  padding: 16px;
+  position: absolute;
+  top: 80px;
+  left: calc(50% + 184px);
+  width: 464px;
+  height: 131px;
+  padding: 24px;
   border: 1px solid var(--pc-line);
-  border-radius: 10px;
+  border-radius: 16px;
   background: #ffffff;
 }
 
 .personal-cabinet-dashboard__personal p {
-  margin: 0 0 12px;
-  color: var(--pc-primary-dark);
-  font-size: 9px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
+  margin: 0 0 16px;
+  color: var(--pc-ink);
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .personal-cabinet-dashboard__personal dl {
   display: grid;
   margin: 0;
-  gap: 8px;
+  gap: 12px;
 }
 
 .personal-cabinet-dashboard__personal dl div {
@@ -105,7 +129,7 @@ defineExpose({ focusLauncher })
 .personal-cabinet-dashboard__personal dt,
 .personal-cabinet-dashboard__personal dd {
   margin: 0;
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .personal-cabinet-dashboard__personal dt {
@@ -113,13 +137,35 @@ defineExpose({ focusLauncher })
 }
 
 .personal-cabinet-dashboard__personal dd {
-  font-weight: 700;
+  font-weight: 600;
+}
+
+.personal-cabinet-dashboard__withdrawal {
+  position: absolute;
+  top: 614px;
+  left: calc(50% - 648px);
+  width: 792px;
+}
+
+@media (max-width: 1023px) and (min-width: 768px) {
+  .personal-cabinet-dashboard__main {
+    width: 138.8889%;
+    transform: scale(0.72);
+    transform-origin: top left;
+  }
 }
 
 @media (max-width: 767px) {
+  .personal-cabinet-dashboard {
+    min-height: 1600px;
+  }
+
   .personal-cabinet-dashboard__main {
-    width: min(100% - 24px, 540px);
-    padding-block: 14px 90px;
+    display: grid;
+    width: min(100% - 32px, 540px);
+    height: auto;
+    margin-inline: auto;
+    padding-block: 8px 90px;
     gap: 12px;
   }
 
@@ -127,13 +173,36 @@ defineExpose({ focusLauncher })
     display: none;
   }
 
+  .personal-cabinet-dashboard__main > :deep(.personal-cabinet-user-summary) {
+    position: absolute;
+    top: -52px;
+    left: 8px;
+    width: 121px;
+  }
+
+  .personal-cabinet-dashboard__main > :deep(.personal-cabinet-progress-card),
+  .personal-cabinet-dashboard__grid,
+  .personal-cabinet-dashboard__personal {
+    position: static;
+    width: 100%;
+  }
+
   .personal-cabinet-dashboard__grid {
-    grid-template-columns: 1fr;
+    display: contents;
+  }
+
+  .personal-cabinet-dashboard__grid > :deep(.personal-cabinet-balance-card) {
+    order: 3;
+  }
+
+  .personal-cabinet-dashboard__grid > :deep(.personal-cabinet-checklist) {
+    order: 5;
   }
 
   .personal-cabinet-dashboard__personal {
-    display: block;
-    order: 5;
+    height: auto;
+    padding: 16px;
+    order: 4;
   }
 }
 </style>

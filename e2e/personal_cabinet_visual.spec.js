@@ -7,7 +7,7 @@ const openApp = async (page, viewport) => {
 }
 
 test('desktop commission screen matches the approved visual baseline', async ({ page }) => {
-  await openApp(page, { width: 1440, height: 1000 })
+  await openApp(page, { width: 1440, height: 910 })
 
   await expect(page).toHaveScreenshot('commission-desktop.png', {
     animations: 'disabled',

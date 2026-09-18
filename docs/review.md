@@ -1,7 +1,7 @@
 # Code review
 
-Дата: 17 сентября 2026  
-Scope: commit `185a380`
+Дата: 18 сентября 2026
+Scope: финальный pixel-perfect pass
 
 ## Проверено
 
@@ -16,6 +16,10 @@ Scope: commit `185a380`
 - dependency/runtime audit.
 
 ## Найдено и исправлено
+
+### P0 — первая версия не соответствовала геометрии Figma
+
+Первое сравнение ошибочно использовало увеличенный crop общего canvas и не гарантировало загрузку `Inter`: в Chrome срабатывал fallback `Avenir`. Публичный scene graph декодирован напрямую; зафиксированы точные frame/node IDs, размеры, offsets, typography, colors и assets. Подключены self-hosted `Inter`/`Geist`, modal перестроен по абсолютной геометрии Figma. Эталоны теперь экспортируются при 100% zoom без апскейла.
 
 ### P0 — mobile modal выходил за viewport
 
@@ -37,12 +41,12 @@ Vitest/Stryker загружал статические ESM exports до акти
 
 - Blocking findings: **0**.
 - Каждый Vue component: отдельный `personal_cabinet_*.vue` файл.
-- Максимальный размер компонента: **151 строка** при лимите 300.
+- Максимальный размер компонента: **233 строки** при лимите 300.
 - Inline CSS/JS: **не найдено**.
 - Production dependencies audit: **0 high/critical vulnerabilities**.
 
 ## Осознанные ограничения
 
 - Это frontend-demo: реальный API подтверждения платежа не был дан в ТЗ.
-- Публичный Figma view не предоставляет исходные шрифтовые файлы и export assets, поэтому logo/avatar воспроизведены CSS/SVG средствами.
+- Exact Figma frame exports доступны только через canvas render; для воспроизводимости их reviewed 100% captures сохранены в `comparison/`.
 - Git remote и Vercel credentials отсутствуют локально; репозиторий и `vercel.json` полностью подготовлены, но публикация требует аккаунта владельца.

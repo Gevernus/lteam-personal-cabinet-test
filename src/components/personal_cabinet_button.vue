@@ -65,16 +65,17 @@ defineExpose({ focus })
 <style scoped>
 .personal-cabinet-button {
   display: inline-flex;
-  min-height: 42px;
+  min-height: 50px;
   align-items: center;
   justify-content: center;
   gap: 8px;
   padding: 0 22px;
   border: 1px solid transparent;
-  border-radius: 7px;
-  font-size: 14px;
-  font-weight: 650;
-  line-height: 1;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgb(26 26 26 / 5%);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 20px;
   transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease;
 }
 

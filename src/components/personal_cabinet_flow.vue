@@ -66,6 +66,7 @@ onMounted(focusDialog)
       v-if="modalOpen"
       ref="modal"
       :title="titles[state]"
+      :variant="state"
       @back="handleBack"
       @close="closeModal"
     >

@@ -12,7 +12,7 @@ defineProps({
   },
   size: {
     type: Number,
-    default: 18,
+    default: 24,
   },
   quiet: {
     type: Boolean,
@@ -40,15 +40,15 @@ const handleClick = (event) => emit('click', event)
 <style scoped>
 .personal-cabinet-icon-button {
   display: inline-grid;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
   place-items: center;
   padding: 0;
-  border: 1px solid var(--pc-line);
+  border: 1px solid transparent;
   border-radius: 50%;
-  background: var(--pc-surface-soft);
-  color: var(--pc-primary-dark);
+  background: #f4f4f5;
+  color: var(--pc-primary);
   cursor: pointer;
   transition: border-color 160ms ease, background-color 160ms ease;
 }

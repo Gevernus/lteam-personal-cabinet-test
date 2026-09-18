@@ -12,7 +12,7 @@
 - подтверждение и повторное открытие сценария;
 - keyboard/focus management, `aria-live`, reduced motion;
 - Vue Composition API (`<script setup>`);
-- 21 переиспользуемый domain-component, каждый меньше 300 строк;
+- 22 переиспользуемых domain-component, каждый меньше 300 строк;
 - без inline CSS, native inline JS handlers и `v-html`;
 - Vercel-конфигурация и инструкция для Laravel Vite.
 
@@ -64,6 +64,7 @@ docs/               спека, review и интеграция
 ## Документация
 
 - [Спецификация и acceptance criteria](docs/specification.md)
+- [Точные параметры Figma](docs/figma-implementation-spec.md)
 - [Выбранный экран](docs/selected-screen.md)
 - [Требования из переписки](docs/brief.md)
 - [Code review](docs/review.md)

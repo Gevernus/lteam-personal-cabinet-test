@@ -39,17 +39,25 @@ const handleCopy = () => emit('copy', { label: props.label, value: props.value }
 
 <style scoped>
 .personal-cabinet-detail-row {
+  position: relative;
   display: grid;
-  min-height: 57px;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 12px;
-  border-bottom: 1px solid var(--pc-line-soft);
-  grid-template-columns: 1fr auto;
+  height: 71px;
+  align-items: start;
+  grid-template-columns: 1fr 20px;
 }
 
-.personal-cabinet-detail-row:last-child {
-  border-bottom: 0;
+.personal-cabinet-detail-row:not(:last-of-type)::after {
+  position: absolute;
+  top: 55px;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: var(--pc-line);
+  content: '';
+}
+
+.personal-cabinet-detail-row:last-of-type {
+  height: 39px;
 }
 
 .personal-cabinet-detail-row dl,
@@ -61,25 +69,58 @@ const handleCopy = () => emit('copy', { label: props.label, value: props.value }
 .personal-cabinet-detail-row dt {
   margin-bottom: 4px;
   color: var(--pc-ink-muted);
-  font-size: 8px;
-  font-weight: 750;
-  letter-spacing: 0.06em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 14px;
   text-transform: uppercase;
 }
 
 .personal-cabinet-detail-row dd {
   overflow-wrap: anywhere;
   color: var(--pc-ink);
-  font-size: 12px;
-  font-weight: 680;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21px;
 }
 
-@media (max-width: 479px) {
+.personal-cabinet-detail-row :deep(.personal-cabinet-icon-button) {
+  width: 20px;
+  height: 20px;
+  margin-top: 10px;
+  color: var(--pc-primary);
+}
+
+@media (max-width: 767px) {
   .personal-cabinet-detail-row {
-    min-height: 50px;
-    padding: 6px 9px;
+    height: 47px;
   }
 
+  .personal-cabinet-detail-row:not(:last-of-type)::after {
+    top: 39px;
+  }
+
+  .personal-cabinet-detail-row:last-of-type {
+    height: 31px;
+  }
+
+  .personal-cabinet-detail-row dt {
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 12px;
+  }
+
+  .personal-cabinet-detail-row dd {
+    font-size: 12px;
+    line-height: 15px;
+  }
+
+  .personal-cabinet-detail-row :deep(.personal-cabinet-icon-button) {
+    margin-top: 6px;
+  }
+}
+
+@media (max-width: 359px) {
   .personal-cabinet-detail-row dd {
     font-size: 10px;
   }

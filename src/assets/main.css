@@ -1,16 +1,32 @@
+@font-face {
+  font-family: Inter;
+  src: url('./fonts/inter_figma.ttf') format('truetype-variations');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100 900;
+}
+
+@font-face {
+  font-family: Geist;
+  src: url('./fonts/geist_figma.ttf') format('truetype-variations');
+  font-display: swap;
+  font-style: normal;
+  font-weight: 100 900;
+}
+
 :root {
-  --pc-primary: #2099af;
-  --pc-primary-dark: #08788e;
+  --pc-primary: #2491aa;
+  --pc-primary-dark: #1c7488;
   --pc-focus: #f3b62f;
-  --pc-ink: #142a31;
-  --pc-ink-soft: #4f646a;
-  --pc-ink-muted: #7b8c91;
-  --pc-line: #d7e2e4;
-  --pc-line-soft: #e8eeee;
-  --pc-surface-soft: #eaf6f8;
+  --pc-ink: #1a2332;
+  --pc-ink-soft: #4f5663;
+  --pc-ink-muted: #71717a;
+  --pc-line: #e4e4e7;
+  --pc-line-soft: #f0f2f5;
+  --pc-surface-soft: #eaf4f6;
   color: var(--pc-ink);
-  background: #f5f7f7;
-  font-family: Inter, Avenir, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #f8fafb;
+  font-family: Inter, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
 }
@@ -21,7 +37,7 @@
 
 html {
   min-width: 320px;
-  background: #f5f7f7;
+  background: #f8fafb;
 }
 
 body {

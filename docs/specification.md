@@ -28,7 +28,7 @@ Backend/API в тестовое задание не входят. Все дан�
 
 - header с логотипом Avanti;
 - desktop-навигация Home / Documenti / Profilo;
-- mobile bottom navigation;
+- mobile compact navigation Home / Docs / Profilo in the header;
 - профиль Marco Rossi;
 - progress `Passo 4 di 5`;
 - баланс `€ 12 000`;
@@ -64,7 +64,7 @@ Backend/API в тестовое задание не входят. Все дан�
 - IBAN `IT26 U020 0809 5000 0043 1003 095`;
 - SWIFT/BIC `UNCRITMMXXX`;
 - сумму `37 €`;
-- подсказку с причиной платежа `Transferir`;
+- подсказку с причиной платежа `"Transfer"`;
 - CTA `Conferma pagamento`.
 
 Кнопки копирования имеют доступные имена. Успешное копирование временно объявляется через `aria-live`. При недоступном Clipboard API интерфейс не падает и сообщает, что значение нужно скопировать вручную.

@@ -27,7 +27,8 @@ defineProps({
       <path d="m9.5 6 6 6-6 6" />
     </template>
     <template v-else-if="name === 'close'">
-      <path d="m7 7 10 10M17 7 7 17" />
+      <circle cx="12" cy="12" r="9" />
+      <path d="m9 9 6 6M15 9l-6 6" />
     </template>
     <template v-else-if="name === 'copy'">
       <rect x="8" y="8" width="10" height="11" rx="2" />
@@ -37,6 +38,10 @@ defineProps({
       <circle cx="12" cy="12" r="9" />
       <path d="M12 10v6M12 7.5v.1" />
     </template>
+    <template v-else-if="name === 'help'">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M9.8 9a2.3 2.3 0 1 1 3.3 2.1c-.8.4-1.1.9-1.1 1.9M12 16.5v.1" />
+    </template>
     <template v-else-if="name === 'check'">
       <circle cx="12" cy="12" r="9" />
       <path d="m8 12 2.6 2.6L16.5 9" />
@@ -44,6 +49,10 @@ defineProps({
     <template v-else-if="name === 'wallet'">
       <path d="M4 7.5A2.5 2.5 0 0 1 6.5 5H19v14H6.5A2.5 2.5 0 0 1 4 16.5z" />
       <path d="M4 8h15M15 12h4v4h-4a2 2 0 1 1 0-4Z" />
+    </template>
+    <template v-else-if="name === 'card'">
+      <rect x="2" y="5" width="20" height="14" rx="2" />
+      <path d="M2 9h20M6 15h5" />
     </template>
     <template v-else-if="name === 'document'">
       <path d="M7 3h7l4 4v14H7z" />

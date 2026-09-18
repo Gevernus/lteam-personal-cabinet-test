@@ -31,14 +31,18 @@ const items = [
         <PersonalCabinetIcon :name="item.done ? 'check' : 'arrow-right'" :size="18" />
       </li>
     </ul>
+    <div class="personal-cabinet-checklist__progress" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
   </section>
 </template>
 
 <style scoped>
 .personal-cabinet-checklist {
+  height: 516px;
   overflow: hidden;
   border: 1px solid var(--pc-line);
-  border-radius: 12px;
+  border-radius: 16px;
   background: #ffffff;
 }
 
@@ -46,7 +50,8 @@ const items = [
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 18px 20px 14px;
+  height: 89px;
+  padding: 20px 24px;
   border-bottom: 1px solid var(--pc-line);
 }
 
@@ -84,10 +89,10 @@ const items = [
 
 .personal-cabinet-checklist li {
   display: grid;
-  min-height: 53px;
+  height: 76px;
   align-items: center;
   gap: 11px;
-  padding: 8px 18px;
+  padding: 12px 24px;
   border-bottom: 1px solid var(--pc-line-soft);
   grid-template-columns: auto 1fr auto;
   color: var(--pc-primary-dark);
@@ -95,6 +100,25 @@ const items = [
 
 .personal-cabinet-checklist li:last-child {
   border-bottom: 0;
+}
+
+.personal-cabinet-checklist__progress {
+  display: flex;
+  height: 42px;
+  align-items: flex-start;
+  gap: 4px;
+  padding: 16px 24px;
+}
+
+.personal-cabinet-checklist__progress i {
+  width: 80px;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--pc-line);
+}
+
+.personal-cabinet-checklist__progress i:nth-child(-n + 3) {
+  background: var(--pc-primary);
 }
 
 .personal-cabinet-checklist__icon {
@@ -128,6 +152,11 @@ const items = [
     align-items: flex-start;
     gap: 10px;
     flex-direction: column;
+  }
+
+  .personal-cabinet-checklist__progress i {
+    width: auto;
+    flex: 1;
   }
 }
 </style>

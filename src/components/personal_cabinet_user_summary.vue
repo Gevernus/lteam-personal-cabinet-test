@@ -3,7 +3,7 @@
     <div class="personal-cabinet-user-summary__avatar" aria-hidden="true">MR</div>
     <div>
       <strong>Marco Rossi</strong>
-      <span>rossi90@gmail.com</span>
+      <span>ikoei@09gmail.com</span>
     </div>
     <dl>
       <div>
@@ -21,13 +21,9 @@
 <style scoped>
 .personal-cabinet-user-summary {
   display: flex;
-  min-height: 72px;
+  height: 40px;
   align-items: center;
   gap: 12px;
-  padding: 13px 20px;
-  border: 1px solid var(--pc-line);
-  border-radius: 10px;
-  background: #ffffff;
 }
 
 .personal-cabinet-user-summary__avatar {
@@ -36,12 +32,10 @@
   height: 40px;
   flex: 0 0 auto;
   place-items: center;
-  border: 3px solid #dcebed;
   border-radius: 50%;
-  background: linear-gradient(145deg, #263c42 0 48%, #b9d6d9 48%);
-  color: #ffffff;
-  font-size: 10px;
-  font-weight: 800;
+  background: url('../assets/marco_rossi_avatar.jpg') center / cover;
+  color: transparent;
+  font-size: 0;
 }
 
 .personal-cabinet-user-summary strong,
@@ -51,17 +45,17 @@
 
 .personal-cabinet-user-summary strong {
   color: var(--pc-ink);
-  font-size: 13px;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .personal-cabinet-user-summary span {
-  margin-top: 2px;
   color: var(--pc-ink-muted);
-  font-size: 10px;
+  font-size: 12px;
 }
 
 .personal-cabinet-user-summary dl {
-  display: grid;
+  display: none;
   margin: 0 0 0 auto;
   gap: 7px;
   text-align: right;
@@ -89,11 +83,16 @@
 
 @media (max-width: 767px) {
   .personal-cabinet-user-summary {
-    min-height: 64px;
-    padding: 10px 12px;
+    height: 40px;
+    padding-left: 8px;
   }
 
-  .personal-cabinet-user-summary dl {
+  .personal-cabinet-user-summary__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .personal-cabinet-user-summary span {
     display: none;
   }
 }

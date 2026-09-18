@@ -1,24 +1,35 @@
 # QA report
 
-Дата финального прогона: 17 сентября 2026
+Дата финального прогона: 18 сентября 2026
 
 ## Результаты
 
 | Gate | Результат |
 |---|---|
-| Static component policy | 21/21 components passed |
+| Static component policy | 22/22 components passed |
 | Test-quality/vacuous scan | 5/5 test files passed |
 | Vitest | 23/23 passed |
 | Playwright | 4/4 passed |
 | Accessibility | 3 states, 0 axe violations |
 | Production build | passed |
 | Runtime dependency audit | 0 vulnerabilities |
-| Statement coverage | 98.85% |
-| Branch coverage | 97.41% |
-| Function coverage | 97.61% |
-| Line coverage | 98.67% |
+| Statement coverage | 98.87% |
+| Branch coverage | 91.81% |
+| Function coverage | 97.50% |
+| Line coverage | 98.69% |
 | Mutation score | 100% — 56/56 killed |
 | Mutation test strength | 100% |
+
+## Figma similarity
+
+Точное сравнение modal region против 100% Figma canvas render:
+
+| State | Desktop SSIM | Mobile SSIM |
+|---|---:|---:|
+| Commissione | 0.958 | 0.921 |
+| Coordinate | 0.947 | 0.893 |
+
+Outer modal geometry совпадает с Figma по `x/y/width/height` во всех четырёх reference frames. Diff/overlay артефакты находятся в `comparison/`.
 
 ## Spec coverage
 
@@ -55,4 +66,4 @@ npm audit --omit=dev --audit-level=high
 
 - Реальный backend/API: контракт не предоставлен.
 - Реальный банковский перевод: UI использует локальный demo state.
-- Pixel-level сравнение с закрытыми Figma export assets: публичный view не выдаёт исходные файлы; вместо этого зафиксированы reviewed Playwright baselines desktop/mobile.
+- Raster-perfect совпадение antialiasing между WebGL canvas Figma и Chrome DOM не гарантируется; геометрия сравнивается при одинаковых frame dimensions, exact font binaries и device scale factor 1.

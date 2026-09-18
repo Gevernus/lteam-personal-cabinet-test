@@ -1,30 +1,19 @@
-# Pixel comparison
+# Figma / implementation pixel comparison
 
-## Desktop
+All Figma references were captured directly from the public Figma canvas at **100% zoom** using exact frame node IDs. No thumbnail upscaling is used.
 
-Both high-resolution files are exactly `1440 × 878`:
+## Commission
 
-- `figma-commission-desktop.png`
-- `implementation-commission-desktop.png`
-- `overlay-50-percent.png`
-- `pixel-diff-enhanced.png`
-- `side-by-side.png`
+| Device | Dimensions | Figma | Implementation | Side by side | 50% overlay | Enhanced diff |
+|---|---:|---|---|---|---|---|
+| Desktop | 1440×910 | `figma-commission-desktop.png` | `implementation-commission-desktop.png` | `side-by-side-commission-desktop.png` | `overlay-commission-desktop-50-percent.png` | `pixel-diff-commission-desktop-enhanced.png` |
+| Mobile | 390×1620 | `figma-commission-mobile.png` | `implementation-commission-mobile.png` | `side-by-side-commission-mobile.png` | `overlay-commission-mobile-50-percent.png` | `pixel-diff-commission-mobile-enhanced.png` |
 
-The public Figma canvas only exposes this frame at `587 × 358`. The Figma desktop PNG is therefore an upscale of the public canvas crop. For comparison without interpolation, use:
+## Coordinates
 
-- `figma-commission-desktop-public-scale.png`
-- `implementation-commission-desktop-public-scale.png`
+| Device | Dimensions | Figma | Implementation | Side by side | 50% overlay | Enhanced diff |
+|---|---:|---|---|---|---|---|
+| Desktop | 1440×910 | `figma-coordinates-desktop.png` | `implementation-coordinates-desktop.png` | `side-by-side-coordinates-desktop.png` | `overlay-coordinates-desktop-50-percent.png` | `pixel-diff-coordinates-desktop-enhanced.png` |
+| Mobile | 390×1620 | `figma-coordinates-mobile.png` | `implementation-coordinates-mobile.png` | `side-by-side-coordinates-mobile.png` | `overlay-coordinates-mobile-50-percent.png` | `pixel-diff-coordinates-mobile-enhanced.png` |
 
-Both are exactly `587 × 358`.
-
-## Mobile
-
-Both source files are exactly `390 × 844`:
-
-- `figma-commission-mobile.png`
-- `implementation-commission-mobile.png`
-- `overlay-mobile-50-percent.png`
-- `pixel-diff-mobile-enhanced.png`
-- `side-by-side-mobile.png`
-
-The Figma images are cropped from `references/commission-flow.png`, the reviewed public Figma canvas capture. Implementation images were captured from the current commit with Playwright/Chrome at device scale factor 1.
+`side-by-side.png` and `side-by-side-mobile.png` are aliases for the commission comparisons.

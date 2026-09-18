@@ -2,6 +2,9 @@
 
 Адаптивный Vue 3 сценарий личного кабинета Avanti по Figma: **Commissione da versare → Coordinate di pagamento → подтверждение**.
 
+- **Live demo:** https://lteam-personal-cabinet-test.vercel.app
+- **GitHub:** https://github.com/Gevernus/lteam-personal-cabinet-test
+
 ## Реализовано
 
 - desktop, tablet и mobile от 320px;
@@ -78,11 +81,12 @@ docs/               спека, review и интеграция
 
 ## Vercel
 
-`vercel.json` уже настроен под Vite:
+Production: https://lteam-personal-cabinet-test.vercel.app
+
+`vercel.json` настроен под Vite. Локальная директория связана с Vercel-проектом `gev2/lteam-personal-cabinet-test`; повторный production deploy:
 
 ```bash
-npx vercel
 npx vercel --prod
 ```
 
-Публикация требует авторизации в Vercel. Git remote в локальном репозитории намеренно не создаётся без URL владельца.
+Автоматические deploy на push требуют разрешения репозитория для Vercel GitHub App. До его подключения deployment выполняется через CLI.

@@ -9,7 +9,7 @@
 | # | Дословное требование | Initial | Final |
 |---:|---|:---:|:---:|
 | 1 | Любое одно окно ЛК: PC + mobile | PASS | PASS |
-| 2 | Отправить Git + Vercel | FAIL | FAIL — external publication blocker |
+| 2 | Отправить Git + Vercel | FAIL | PASS |
 | 3 | Сразу для работы под Laravel | FAIL | PASS |
 | 4 | Всё разнести по компонентам, кнопка — отдельный компонент | PARTIAL | PASS |
 | 5 | Один компонент — один файл | PASS | PASS |
@@ -32,9 +32,12 @@
 - Laravel guide включает fonts/avatar/data, а `npm run test:laravel` реально собирает перемещённую структуру `resources/js`.
 - Добавлены adversarial reusability tests: альтернативная модель, два экземпляра, controlled state, коллекция другой длины.
 
-## Единственный незакрытый пункт
+## Публикация
 
-Код и `vercel.json` готовы, но буквальное требование №2 требует внешних действий: создать Git remote, push и Vercel deployment URL. Локально отсутствуют URL remote и credentials владельца, поэтому reviewer корректно оставляет этот пункт в `FAIL`.
+- GitHub: https://github.com/Gevernus/lteam-personal-cabinet-test
+- Vercel: https://lteam-personal-cabinet-test.vercel.app
+
+Репозиторий публичный, ветка `main` отслеживает `origin/main`, production deployment отвечает HTTP 200.
 
 ## Final gates
 

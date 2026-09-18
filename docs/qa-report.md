@@ -12,6 +12,7 @@
 | Playwright | 4/4 passed |
 | Accessibility | 3 states, 0 axe violations |
 | Production build | passed |
+| Vercel production smoke test | HTTP 200, interactive flow passed |
 | Relocated Laravel-style build | passed |
 | Runtime dependency audit | 0 vulnerabilities |
 | Statement coverage | 99.09% |

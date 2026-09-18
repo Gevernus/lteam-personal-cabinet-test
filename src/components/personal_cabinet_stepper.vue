@@ -29,6 +29,7 @@ const steps = ['IBAN', 'COMMISSIONE', 'COORDINATE']
   height: 29px;
   overflow: hidden;
   margin: 0;
+  border-radius: 8px;
   padding: 0;
   gap: 2px;
   grid-template-columns: repeat(3, 1fr);

@@ -38,6 +38,23 @@ page          #F8FAFB
 overlay        #1A2332 @ 45%
 ```
 
+## Border radii
+
+| Element | Radius |
+|---|---:|
+| Modal shell | `23px` |
+| Amount/details/dashboard cards | `16px` |
+| Notice and payment-method control | `12px` |
+| Primary CTA | `8px` |
+| Stepper outer corners | `8px` |
+| Payment icon | desktop `8px`, mobile `4.4px` |
+| Balance card | `20px` |
+| Balance-card CTA | `14px` |
+| Circular controls | `50%` — equivalent to Figma's clamped `100px` |
+| Pills/progress segments | `99px` |
+
+У stepper радиус применяется только к двум внешним сторонам: первая ячейка имеет левые углы `8px`, последняя — правые, центральная ячейка остаётся прямоугольной.
+
 ## Commission modal geometry
 
 Desktop uses `24px` Figma inset, `24px` vertical rhythm and `23px` radius. CSS uses a `23px` padding value because the 1px inside border participates in `border-box`; this places content at the same absolute `x/y` as Figma.

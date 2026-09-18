@@ -74,7 +74,7 @@ const items = [
 
 .personal-cabinet-checklist__header b {
   padding: 7px 10px;
-  border-radius: 16px;
+  border-radius: 99px;
   background: var(--pc-surface-soft);
   color: var(--pc-primary-dark);
   font-size: 9px;

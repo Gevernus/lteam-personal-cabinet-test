@@ -33,7 +33,7 @@ import {
   margin: 0 0 4px;
   color: var(--pc-primary);
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 625;
   letter-spacing: 0.8px;
   line-height: 13px;
 }
@@ -43,7 +43,7 @@ import {
   margin-bottom: 16px;
   color: var(--pc-ink);
   font-size: 48px;
-  font-weight: 700;
+  font-weight: 625;
   letter-spacing: 0;
   line-height: 58px;
 }
@@ -73,8 +73,12 @@ import {
   line-height: 17px;
 }
 
+.personal-cabinet-amount-breakdown dt {
+  font-weight: 325;
+}
+
 .personal-cabinet-amount-breakdown dd {
-  font-weight: 600;
+  font-weight: 525;
 }
 
 @media (max-width: 767px) {
@@ -86,6 +90,19 @@ import {
 
   .personal-cabinet-amount-breakdown > p {
     color: var(--pc-surface-soft);
+    font-weight: 600;
+  }
+
+  .personal-cabinet-amount-breakdown > strong {
+    font-weight: 600;
+  }
+
+  .personal-cabinet-amount-breakdown dt {
+    font-weight: 300;
+  }
+
+  .personal-cabinet-amount-breakdown dd {
+    font-weight: 500;
   }
 
   .personal-cabinet-amount-breakdown > strong,

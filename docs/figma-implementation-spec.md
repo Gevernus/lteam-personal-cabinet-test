@@ -20,8 +20,8 @@ Visual exports в `comparison/` получены при Figma zoom `100%`, бе�
 - Подключены exact variable font binaries, загружаемые самим Figma (`Inter_1`, `Geist_wght__1`), с локальным диапазоном весов `100–900`.
 - Commission title: `26/31`, weight `600`.
 - Mobile coordinates title: `24/29`, weight `600`.
-- Amount: `48/58`, weight `700`.
-- Fee rows: `14/17`, regular/semibold.
+- Amount: source `48/58`, weight `700`; DOM raster compensation uses variable weight `625` desktop / `600` mobile.
+- Fee rows: source `14/17`, regular/semibold; calibrated to `325/525` desktop and `300/500` mobile to match Figma canvas ink density.
 - CTA: `16/20`, weight `600`.
 
 ## Core tokens

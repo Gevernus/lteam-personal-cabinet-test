@@ -26,7 +26,7 @@
 
 | State | Desktop SSIM | Mobile SSIM |
 |---|---:|---:|
-| Commissione | 0.961 | 0.926 |
+| Commissione | 0.962 | 0.934 |
 | Coordinate | 0.949 | 0.898 |
 
 Outer modal geometry совпадает с Figma по `x/y/width/height` во всех четырёх reference frames. Diff/overlay артефакты находятся в `comparison/`.

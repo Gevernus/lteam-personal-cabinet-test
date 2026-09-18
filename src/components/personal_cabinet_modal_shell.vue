@@ -11,6 +11,18 @@ const props = defineProps({
     type: String,
     default: 'COMMISSIONE',
   },
+  backLabel: {
+    type: String,
+    default: 'Indietro',
+  },
+  closeLabel: {
+    type: String,
+    default: 'Chiudi',
+  },
+  legal: {
+    type: String,
+    required: true,
+  },
   variant: {
     type: String,
     default: 'commission',
@@ -45,17 +57,15 @@ defineExpose({ focusTitle })
       :aria-labelledby="titleId"
     >
       <header class="personal-cabinet-modal-shell__header">
-        <PersonalCabinetIconButton label="Indietro" icon="arrow-left" @click="handleBack" />
-        <PersonalCabinetIconButton label="Chiudi" icon="close" @click="handleClose" />
+        <PersonalCabinetIconButton :label="props.backLabel" icon="arrow-left" @click="handleBack" />
+        <PersonalCabinetIconButton :label="props.closeLabel" icon="close" @click="handleClose" />
       </header>
       <div class="personal-cabinet-modal-shell__title">
         <p>{{ props.eyebrow }}</p>
         <h1 :id="titleId" ref="titleElement" tabindex="-1">{{ props.title }}</h1>
       </div>
       <slot />
-      <footer class="personal-cabinet-modal-shell__legal">
-        Connessione SSL&nbsp;&nbsp;·&nbsp;&nbsp;Visa&nbsp;&nbsp;·&nbsp;&nbsp;Mastercard&nbsp;&nbsp;·&nbsp;&nbsp;SEPA
-      </footer>
+      <footer class="personal-cabinet-modal-shell__legal">{{ props.legal }}</footer>
     </section>
   </div>
 </template>
@@ -159,6 +169,7 @@ defineExpose({ focusTitle })
   font-size: 12px;
   line-height: 15px;
   text-align: center;
+  white-space: pre;
 }
 
 .personal-cabinet-modal-shell__legal span {

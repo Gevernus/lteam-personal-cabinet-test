@@ -1,14 +1,23 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, useId } from 'vue'
 import PersonalCabinetBalanceCard from './personal_cabinet_balance_card.vue'
 import PersonalCabinetChecklist from './personal_cabinet_checklist.vue'
 import PersonalCabinetHeader from './personal_cabinet_header.vue'
+import PersonalCabinetPersonalData from './personal_cabinet_personal_data.vue'
 import PersonalCabinetProgressCard from './personal_cabinet_progress_card.vue'
 import PersonalCabinetUserSummary from './personal_cabinet_user_summary.vue'
 import PersonalCabinetWithdrawalBanner from './personal_cabinet_withdrawal_banner.vue'
 
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
+
 const emit = defineEmits(['open-commission'])
 const balanceCard = ref(null)
+const mainId = useId()
 
 const handleOpen = () => emit('open-commission')
 const focusLauncher = () => balanceCard.value?.focusLauncher()
@@ -18,25 +27,42 @@ defineExpose({ focusLauncher })
 
 <template>
   <div class="personal-cabinet-dashboard">
-    <PersonalCabinetHeader />
-    <main id="main-content" class="personal-cabinet-dashboard__main">
-      <div class="personal-cabinet-dashboard__breadcrumb" aria-label="Breadcrumb">
-        Piattaforma <span>/</span> <strong>Home</strong>
+    <PersonalCabinetHeader :navigation="props.model.navigation" :main-id="mainId" />
+    <main :id="mainId" class="personal-cabinet-dashboard__main">
+      <div
+        class="personal-cabinet-dashboard__breadcrumb"
+        :aria-label="props.model.breadcrumbLabel"
+      >
+        {{ props.model.breadcrumb[0] }} <span>/</span> <strong>{{ props.model.breadcrumb[1] }}</strong>
       </div>
-      <PersonalCabinetUserSummary />
-      <PersonalCabinetProgressCard />
+      <PersonalCabinetUserSummary
+        class="personal-cabinet-dashboard__user"
+        :user="props.model.user"
+      />
+      <PersonalCabinetProgressCard
+        class="personal-cabinet-dashboard__progress"
+        :model="props.model.progress"
+      />
       <div class="personal-cabinet-dashboard__grid">
-        <PersonalCabinetBalanceCard ref="balanceCard" @open-commission="handleOpen" />
-        <PersonalCabinetChecklist />
+        <PersonalCabinetBalanceCard
+          ref="balanceCard"
+          class="personal-cabinet-dashboard__balance"
+          :model="props.model.balance"
+          @open-commission="handleOpen"
+        />
+        <PersonalCabinetChecklist
+          class="personal-cabinet-dashboard__checklist"
+          :model="props.model.checklist"
+        />
       </div>
-      <section class="personal-cabinet-dashboard__personal" aria-label="Dati personali">
-        <p>Dati personali</p>
-        <dl>
-          <div><dt>Cognome</dt><dd>Intesa Sanpaolo S.p.A.</dd></div>
-          <div><dt>Nome</dt><dd>Marco Rossi</dd></div>
-        </dl>
-      </section>
-      <PersonalCabinetWithdrawalBanner class="personal-cabinet-dashboard__withdrawal" />
+      <PersonalCabinetPersonalData
+        class="personal-cabinet-dashboard__personal"
+        :model="props.model.personalData"
+      />
+      <PersonalCabinetWithdrawalBanner
+        class="personal-cabinet-dashboard__withdrawal"
+        :model="props.model.withdrawal"
+      />
     </main>
   </div>
 </template>
@@ -71,14 +97,14 @@ defineExpose({ focusLauncher })
   color: var(--pc-ink);
 }
 
-.personal-cabinet-dashboard__main > :deep(.personal-cabinet-user-summary) {
+.personal-cabinet-dashboard__user {
   position: absolute;
   top: 10px;
   left: calc(50% - 648px);
   width: 200px;
 }
 
-.personal-cabinet-dashboard__main > :deep(.personal-cabinet-progress-card) {
+.personal-cabinet-dashboard__progress {
   position: absolute;
   top: 80px;
   left: calc(50% - 648px);
@@ -101,43 +127,6 @@ defineExpose({ focusLauncher })
   top: 80px;
   left: calc(50% + 184px);
   width: 464px;
-  height: 131px;
-  padding: 24px;
-  border: 1px solid var(--pc-line);
-  border-radius: 16px;
-  background: #ffffff;
-}
-
-.personal-cabinet-dashboard__personal p {
-  margin: 0 0 16px;
-  color: var(--pc-ink);
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.personal-cabinet-dashboard__personal dl {
-  display: grid;
-  margin: 0;
-  gap: 12px;
-}
-
-.personal-cabinet-dashboard__personal dl div {
-  display: flex;
-  justify-content: space-between;
-}
-
-.personal-cabinet-dashboard__personal dt,
-.personal-cabinet-dashboard__personal dd {
-  margin: 0;
-  font-size: 12px;
-}
-
-.personal-cabinet-dashboard__personal dt {
-  color: var(--pc-ink-muted);
-}
-
-.personal-cabinet-dashboard__personal dd {
-  font-weight: 600;
 }
 
 .personal-cabinet-dashboard__withdrawal {
@@ -173,14 +162,14 @@ defineExpose({ focusLauncher })
     display: none;
   }
 
-  .personal-cabinet-dashboard__main > :deep(.personal-cabinet-user-summary) {
+  .personal-cabinet-dashboard__user {
     position: absolute;
     top: -52px;
     left: 8px;
     width: 121px;
   }
 
-  .personal-cabinet-dashboard__main > :deep(.personal-cabinet-progress-card),
+  .personal-cabinet-dashboard__progress,
   .personal-cabinet-dashboard__grid,
   .personal-cabinet-dashboard__personal {
     position: static;
@@ -191,17 +180,15 @@ defineExpose({ focusLauncher })
     display: contents;
   }
 
-  .personal-cabinet-dashboard__grid > :deep(.personal-cabinet-balance-card) {
+  .personal-cabinet-dashboard__balance {
     order: 3;
   }
 
-  .personal-cabinet-dashboard__grid > :deep(.personal-cabinet-checklist) {
+  .personal-cabinet-dashboard__checklist {
     order: 5;
   }
 
   .personal-cabinet-dashboard__personal {
-    height: auto;
-    padding: 16px;
     order: 4;
   }
 }

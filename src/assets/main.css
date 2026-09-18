@@ -14,7 +14,7 @@
   font-weight: 100 900;
 }
 
-:root {
+.personal-cabinet-app {
   --pc-primary: #2491aa;
   --pc-primary-dark: #1c7488;
   --pc-focus: #f3b62f;
@@ -31,34 +31,24 @@
   text-rendering: optimizeLegibility;
 }
 
-* {
+.personal-cabinet-app,
+.personal-cabinet-app * {
   box-sizing: border-box;
 }
 
-html {
-  min-width: 320px;
-  background: #f8fafb;
-}
-
-body {
-  min-width: 320px;
-  min-height: 100vh;
-  margin: 0;
-}
-
-button,
-input,
-select,
-textarea {
+.personal-cabinet-app button,
+.personal-cabinet-app input,
+.personal-cabinet-app select,
+.personal-cabinet-app textarea {
   font: inherit;
 }
 
-button,
-a {
+.personal-cabinet-app button,
+.personal-cabinet-app a {
   -webkit-tap-highlight-color: transparent;
 }
 
-.sr-only {
+.personal-cabinet-app .sr-only {
   position: absolute;
   overflow: hidden;
   width: 1px;
@@ -72,9 +62,9 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  .personal-cabinet-app *,
+  .personal-cabinet-app *::before,
+  .personal-cabinet-app *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;

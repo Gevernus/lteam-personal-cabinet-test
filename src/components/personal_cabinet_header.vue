@@ -2,35 +2,52 @@
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 import PersonalCabinetLogo from './personal_cabinet_logo.vue'
 
-const links = [
-  { label: 'Home', shortLabel: 'Home', icon: 'home', active: true },
-  { label: 'Documenti', shortLabel: 'Docs', icon: 'document', active: false },
-  { label: 'Profilo', shortLabel: 'Profilo', icon: 'user', active: false },
-]
+const props = defineProps({
+  navigation: {
+    type: Object,
+    required: true,
+  },
+  mainId: {
+    type: String,
+    required: true,
+  },
+})
 </script>
 
 <template>
   <header class="personal-cabinet-header">
     <div class="personal-cabinet-header__inner">
-      <PersonalCabinetLogo />
-      <nav class="personal-cabinet-header__nav" aria-label="Navigazione principale">
+      <PersonalCabinetLogo
+        v-bind="props.navigation.logo"
+        :href="`#${props.mainId}`"
+      />
+      <nav class="personal-cabinet-header__nav" :aria-label="props.navigation.label">
         <a
-          v-for="link in links"
+          v-for="link in props.navigation.links"
           :key="link.label"
           class="personal-cabinet-header__link"
           :class="{ 'personal-cabinet-header__link--active': link.active }"
-          href="#main-content"
+          :href="link.href || `#${props.mainId}`"
           :aria-current="link.active ? 'page' : undefined"
         >
-          <PersonalCabinetIcon :name="link.icon" :size="18" />
+          <PersonalCabinetIcon
+            class="personal-cabinet-header__link-icon"
+            :name="link.icon"
+            :size="18"
+          />
           <span class="personal-cabinet-header__desktop-label">{{ link.label }}</span>
           <span class="personal-cabinet-header__mobile-label">{{ link.shortLabel }}</span>
         </a>
       </nav>
-      <a class="personal-cabinet-header__support" href="mailto:assistenza@example.com">
+      <a class="personal-cabinet-header__support" :href="props.navigation.support.href">
         <PersonalCabinetIcon name="chat" :size="18" />
-        <span>ASSISTENZA</span>
-        <b aria-label="4 nuove notifiche">4</b>
+        <span>{{ props.navigation.support.label }}</span>
+        <b
+          v-if="props.navigation.support.notifications"
+          :aria-label="props.navigation.support.notificationsLabel"
+        >
+          {{ props.navigation.support.notifications }}
+        </b>
       </a>
     </div>
   </header>
@@ -166,7 +183,7 @@ const links = [
     font-size: 12px;
   }
 
-  .personal-cabinet-header__link :deep(svg),
+  .personal-cabinet-header__link-icon,
   .personal-cabinet-header__desktop-label {
     display: none;
   }

@@ -5,16 +5,20 @@ import PersonalCabinetDetailRow from './personal_cabinet_detail_row.vue'
 import PersonalCabinetPaymentMethod from './personal_cabinet_payment_method.vue'
 import PersonalCabinetStepper from './personal_cabinet_stepper.vue'
 
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+  steps: {
+    type: Array,
+    required: true,
+  },
+})
+
 const emit = defineEmits(['confirm'])
 const copyStatus = ref('')
 let feedbackTimer
-
-const details = [
-  { label: 'BENEFICIARIO', value: 'Indaco Salvatore', copyLabel: 'Copia beneficiario' },
-  { label: 'IBAN', value: 'IT26 U020 0809 5000 0043 1003 095', copyLabel: 'Copia IBAN' },
-  { label: 'SWIFT/BIC', value: 'UNCRITMMXXX', copyLabel: 'Copia SWIFT/BIC' },
-  { label: 'IMPORTO', value: '37 €', copyLabel: 'Copia importo' },
-]
 
 const scheduleStatusClear = () => {
   window.clearTimeout(feedbackTimer)
@@ -29,9 +33,9 @@ const handleCopy = async ({ label, value }) => {
       throw new Error('Clipboard API unavailable')
     }
     await navigator.clipboard.writeText(value)
-    copyStatus.value = `${label === 'SWIFT/BIC' ? 'SWIFT/BIC' : label} copiato`
+    copyStatus.value = `${label} ${props.model.copyFeedback.successSuffix}`
   } catch {
-    copyStatus.value = `Copia manualmente: ${value}`
+    copyStatus.value = `${props.model.copyFeedback.manualPrefix} ${value}`
   }
   scheduleStatusClear()
 }
@@ -42,16 +46,21 @@ onBeforeUnmount(() => window.clearTimeout(feedbackTimer))
 </script>
 
 <template>
-  <div class="personal-cabinet-coordinates-content">
-    <PersonalCabinetStepper :current="3" />
-    <p class="personal-cabinet-coordinates-content__intro">
-      Copia i dati, apri la tua banca e invia il bonifico.
-    </p>
-    <PersonalCabinetPaymentMethod />
+  <div
+    class="personal-cabinet-coordinates-content"
+    :class="{ 'personal-cabinet-coordinates-content--fixed': props.model.fixedLayout }"
+  >
+    <PersonalCabinetStepper
+      :current="props.model.currentStep"
+      :steps="props.steps"
+      :aria-label="props.model.stepperLabel"
+    />
+    <p class="personal-cabinet-coordinates-content__intro">{{ props.model.intro }}</p>
+    <PersonalCabinetPaymentMethod v-bind="props.model.paymentMethod" />
     <div class="personal-cabinet-coordinates-content__data-block">
       <div class="personal-cabinet-coordinates-content__details">
         <PersonalCabinetDetailRow
-          v-for="detail in details"
+          v-for="detail in props.model.details"
           :key="detail.label"
           :label="detail.label"
           :value="detail.value"
@@ -59,18 +68,16 @@ onBeforeUnmount(() => window.clearTimeout(feedbackTimer))
           @copy="handleCopy"
         />
         <p class="personal-cabinet-coordinates-content__reason">
-          Se necessario, nel campo "Causale" indichi <strong>"Transfer"</strong>
-          <b class="personal-cabinet-coordinates-content__alert">!</b>
+          {{ props.model.reason.prefix }}<strong>{{ props.model.reason.value }}</strong>
+          <b class="personal-cabinet-coordinates-content__alert">{{ props.model.reason.alert }}</b>
         </p>
       </div>
-      <p class="personal-cabinet-coordinates-content__receipt">
-        Invia la ricevuta al tuo consulente
-      </p>
+      <p class="personal-cabinet-coordinates-content__receipt">{{ props.model.receipt }}</p>
       <p class="personal-cabinet-coordinates-content__status" role="status" aria-live="polite">
         {{ copyStatus }}
       </p>
       <PersonalCabinetButton block icon="arrow-right" @click="handleConfirm">
-        Conferma pagamento
+        {{ props.model.cta }}
       </PersonalCabinetButton>
     </div>
   </div>
@@ -229,5 +236,30 @@ onBeforeUnmount(() => window.clearTimeout(feedbackTimer))
   .personal-cabinet-coordinates-content__intro {
     font-size: 12px;
   }
+}
+
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) {
+  display: grid;
+  height: auto;
+  gap: 24px;
+}
+
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) > *,
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__receipt,
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__status,
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__data-block > :last-child {
+  position: static;
+  width: 100%;
+}
+
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__data-block,
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__details,
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__reason {
+  height: auto;
+}
+
+.personal-cabinet-coordinates-content:not(.personal-cabinet-coordinates-content--fixed) .personal-cabinet-coordinates-content__data-block {
+  display: grid;
+  gap: 12px;
 }
 </style>

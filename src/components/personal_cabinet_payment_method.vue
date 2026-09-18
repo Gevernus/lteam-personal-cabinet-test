@@ -1,18 +1,22 @@
 <script setup>
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
-defineProps({
+const props = defineProps({
   label: {
     type: String,
-    default: 'Seleziona il metodo SEPA Instant',
+    required: true,
+  },
+  icon: {
+    type: String,
+    default: 'help',
   },
 })
 </script>
 
 <template>
   <div class="personal-cabinet-payment-method">
-    <span>{{ label }}</span>
-    <PersonalCabinetIcon name="help" :size="20" />
+    <span>{{ props.label }}</span>
+    <PersonalCabinetIcon :name="props.icon" :size="20" />
   </div>
 </template>
 

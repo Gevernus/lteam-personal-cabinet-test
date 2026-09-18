@@ -2,6 +2,13 @@
 import PersonalCabinetButton from './personal_cabinet_button.vue'
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
+
 const emit = defineEmits(['finish'])
 const handleFinish = () => emit('finish')
 </script>
@@ -11,12 +18,10 @@ const handleFinish = () => emit('finish')
     <span class="personal-cabinet-confirmation-content__icon">
       <PersonalCabinetIcon name="check" :size="34" />
     </span>
-    <h2>Richiesta registrata</h2>
-    <p>
-      Grazie, Marco. Verificheremo il pagamento e aggiorneremo lo stato del tuo finanziamento.
-    </p>
+    <h2>{{ props.model.title }}</h2>
+    <p>{{ props.model.message }}</p>
     <PersonalCabinetButton block icon="home" icon-position="left" @click="handleFinish">
-      Torna alla home
+      {{ props.model.cta }}
     </PersonalCabinetButton>
   </div>
 </template>

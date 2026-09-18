@@ -1,18 +1,27 @@
+<script setup>
+const props = defineProps({
+  user: {
+    type: Object,
+    required: true,
+  },
+})
+</script>
+
 <template>
-  <section class="personal-cabinet-user-summary" aria-label="Profilo utente">
-    <div class="personal-cabinet-user-summary__avatar" aria-hidden="true">MR</div>
+  <section class="personal-cabinet-user-summary" :aria-label="props.user.label">
+    <img
+      class="personal-cabinet-user-summary__avatar"
+      :src="props.user.avatarUrl"
+      :alt="props.user.name"
+    />
     <div>
-      <strong>Marco Rossi</strong>
-      <span>ikoei@09gmail.com</span>
+      <strong>{{ props.user.name }}</strong>
+      <span>{{ props.user.email }}</span>
     </div>
     <dl>
-      <div>
-        <dt>Piattaforma</dt>
-        <dd>Intesa Sanpaolo S.p.A.</dd>
-      </div>
-      <div>
-        <dt>Utente</dt>
-        <dd>Marco Rossi</dd>
+      <div v-for="item in props.user.metadata" :key="item.label">
+        <dt>{{ item.label }}</dt>
+        <dd>{{ item.value }}</dd>
       </div>
     </dl>
   </section>
@@ -31,11 +40,8 @@
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
-  place-items: center;
   border-radius: 50%;
-  background: url('../assets/marco_rossi_avatar.jpg') center / cover;
-  color: transparent;
-  font-size: 0;
+  object-fit: cover;
 }
 
 .personal-cabinet-user-summary strong,

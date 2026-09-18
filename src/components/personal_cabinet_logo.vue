@@ -1,12 +1,31 @@
+<script setup>
+const props = defineProps({
+  brand: {
+    type: String,
+    required: true,
+  },
+  href: {
+    type: String,
+    default: '#main-content',
+  },
+  label: {
+    type: String,
+    required: true,
+  },
+})
+</script>
+
 <template>
-  <a class="personal-cabinet-logo" href="#main-content" aria-label="Avanti, vai al contenuto">
-    <span class="personal-cabinet-logo__mark" aria-hidden="true">
-      <svg viewBox="0 0 48.15 37.57">
-        <path class="personal-cabinet-logo__mark-primary" d="M48.15 17.37C32.79 7.69 23.6 4.14 6.54 0l29.78 17.37L5.71 37.57c17.63-5.93 26.79-10.6 42.44-20.2Z" />
-        <path class="personal-cabinet-logo__mark-secondary" d="M16.84 10.23c5.24 2.34 8.09 3.83 12.8 7.14C18.22 24.51 11.71 28.23 0 34.6l23.93-17.23-7.09-7.14Z" />
-      </svg>
-    </span>
-    <span>Avanti</span>
+  <a class="personal-cabinet-logo" :href="props.href" :aria-label="props.label">
+    <slot name="mark">
+      <span class="personal-cabinet-logo__mark" aria-hidden="true">
+        <svg viewBox="0 0 48.15 37.57">
+          <path class="personal-cabinet-logo__mark-primary" d="M48.15 17.37C32.79 7.69 23.6 4.14 6.54 0l29.78 17.37L5.71 37.57c17.63-5.93 26.79-10.6 42.44-20.2Z" />
+          <path class="personal-cabinet-logo__mark-secondary" d="M16.84 10.23c5.24 2.34 8.09 3.83 12.8 7.14C18.22 24.51 11.71 28.23 0 34.6l23.93-17.23-7.09-7.14Z" />
+        </svg>
+      </span>
+    </slot>
+    <span><slot>{{ props.brand }}</slot></span>
   </a>
 </template>
 

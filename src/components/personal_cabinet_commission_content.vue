@@ -5,20 +5,35 @@ import PersonalCabinetNotice from './personal_cabinet_notice.vue'
 import PersonalCabinetPaymentOption from './personal_cabinet_payment_option.vue'
 import PersonalCabinetStepper from './personal_cabinet_stepper.vue'
 
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+  steps: {
+    type: Array,
+    required: true,
+  },
+})
+
 const emit = defineEmits(['advance'])
 const handleAdvance = () => emit('advance')
 </script>
 
 <template>
   <div class="personal-cabinet-commission-content">
-    <PersonalCabinetStepper :current="2" />
-    <PersonalCabinetAmountBreakdown />
+    <PersonalCabinetStepper
+      :current="props.model.currentStep"
+      :steps="props.steps"
+      :aria-label="props.model.stepperLabel"
+    />
+    <PersonalCabinetAmountBreakdown v-bind="props.model.amount" />
     <PersonalCabinetNotice>
-      Il servizio gestisce la tua pratica di credito e garantisce il trasferimento al tasso agevolato. Il costo del servizio <strong>non è detraibile</strong> dal credito.
+      {{ props.model.notice.prefix }}<strong>{{ props.model.notice.emphasis }}</strong>{{ props.model.notice.suffix }}
     </PersonalCabinetNotice>
-    <PersonalCabinetPaymentOption />
+    <PersonalCabinetPaymentOption v-bind="props.model.paymentOption" />
     <PersonalCabinetButton block icon="arrow-right" @click="handleAdvance">
-      Vai alle coordinate
+      {{ props.model.cta }}
     </PersonalCabinetButton>
   </div>
 </template>

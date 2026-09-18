@@ -1,22 +1,40 @@
 <script setup>
-import {
-  COMMISSION_FEE_ITEMS,
-  COMMISSION_TOTAL_CENTS,
-  formatEuro,
-} from '../utils/personal_cabinet_money.js'
+import { useId } from 'vue'
+import { formatEuro } from '../utils/personal_cabinet_money.js'
+
+const props = defineProps({
+  label: {
+    type: String,
+    required: true,
+  },
+  total: {
+    type: String,
+    required: true,
+  },
+  items: {
+    type: Array,
+    required: true,
+  },
+  accessibleTotalLabel: {
+    type: String,
+    default: 'Totale esatto',
+  },
+})
+
+const titleId = useId()
 </script>
 
 <template>
-  <section class="personal-cabinet-amount-breakdown" aria-labelledby="amount-title">
-    <p id="amount-title">IMPORTO DA VERSARE</p>
-    <strong>37 €</strong>
+  <section class="personal-cabinet-amount-breakdown" :aria-labelledby="titleId">
+    <p :id="titleId">{{ props.label }}</p>
+    <strong>{{ props.total }}</strong>
     <dl>
-      <div v-for="item in COMMISSION_FEE_ITEMS" :key="item.label">
+      <div v-for="item in props.items" :key="item.label">
         <dt>{{ item.label }}</dt>
-        <dd>{{ formatEuro(item.amountCents) }}</dd>
+        <dd>{{ item.value ?? formatEuro(item.amountCents) }}</dd>
       </div>
     </dl>
-    <span class="sr-only">Totale esatto {{ formatEuro(COMMISSION_TOTAL_CENTS) }}</span>
+    <span class="sr-only">{{ props.accessibleTotalLabel }} {{ props.total }}</span>
   </section>
 </template>
 

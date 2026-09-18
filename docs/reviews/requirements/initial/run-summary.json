@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "01-responsive-screen",
+    "returncode": 0,
+    "seconds": 73.1,
+    "stderr": ""
+  },
+  {
+    "slug": "02-git-vercel",
+    "returncode": 0,
+    "seconds": 75.3,
+    "stderr": ""
+  },
+  {
+    "slug": "03-laravel-ready",
+    "returncode": 0,
+    "seconds": 58.7,
+    "stderr": ""
+  },
+  {
+    "slug": "04-componentization-buttons",
+    "returncode": 0,
+    "seconds": 55.6,
+    "stderr": ""
+  },
+  {
+    "slug": "05-one-component-one-file",
+    "returncode": 0,
+    "seconds": 72.0,
+    "stderr": ""
+  },
+  {
+    "slug": "06-domain-filenames",
+    "returncode": 0,
+    "seconds": 42.9,
+    "stderr": ""
+  },
+  {
+    "slug": "07-max-300-lines",
+    "returncode": 0,
+    "seconds": 46.4,
+    "stderr": ""
+  },
+  {
+    "slug": "08-reusability",
+    "returncode": 0,
+    "seconds": 48.9,
+    "stderr": ""
+  },
+  {
+    "slug": "09-script-setup",
+    "returncode": 0,
+    "seconds": 35.9,
+    "stderr": ""
+  },
+  {
+    "slug": "10-no-inline-js-css",
+    "returncode": 0,
+    "seconds": 88.1,
+    "stderr": ""
+  }
+]

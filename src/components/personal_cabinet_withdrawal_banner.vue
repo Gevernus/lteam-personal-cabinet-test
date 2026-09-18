@@ -1,17 +1,25 @@
 <script setup>
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
+
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
 </script>
 
 <template>
-  <section class="personal-cabinet-withdrawal-banner" aria-label="Requisiti per il prelievo">
+  <section class="personal-cabinet-withdrawal-banner" :aria-label="props.model.label">
     <span class="personal-cabinet-withdrawal-banner__icon">
       <PersonalCabinetIcon name="lock" :size="20" />
     </span>
     <div>
-      <strong>Per il prelievo dei fondi, completa tutti gli step</strong>
-      <p>Step ancora da completare</p>
-      <label><span></span>Documenti</label>
-      <label><span></span>Firma</label>
+      <strong>{{ props.model.title }}</strong>
+      <p>{{ props.model.description }}</p>
+      <label v-for="requirement in props.model.requirements" :key="requirement">
+        <span></span>{{ requirement }}
+      </label>
     </div>
   </section>
 </template>

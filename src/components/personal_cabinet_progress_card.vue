@@ -1,23 +1,29 @@
 <script setup>
+import { useId } from 'vue'
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
-const steps = [
-  { label: 'Simul.', complete: true },
-  { label: 'Approv.', complete: true },
-  { label: 'Account', complete: true },
-  { label: 'Docum.', complete: true },
-  { label: 'Firma', complete: false },
-]
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
+
+const titleId = useId()
 </script>
 
 <template>
-  <section class="personal-cabinet-progress-card" aria-labelledby="progress-title">
+  <section
+    class="personal-cabinet-progress-card"
+    :class="{ 'personal-cabinet-progress-card--fixed': props.model.fixedLayout }"
+    :aria-labelledby="titleId"
+  >
     <div class="personal-cabinet-progress-card__header">
-      <h2 id="progress-title">Passo 4 di 5</h2>
-      <span>3 / 5 completati</span>
+      <h2 :id="titleId">{{ props.model.title }}</h2>
+      <span>{{ props.model.completionLabel }}</span>
     </div>
     <ol>
-      <li v-for="step in steps" :key="step.label" :class="{ complete: step.complete }">
+      <li v-for="step in props.model.steps" :key="step.label" :class="{ complete: step.complete }">
         <span>
           <PersonalCabinetIcon v-if="step.complete" name="check-mark" :size="12" />
         </span>
@@ -66,8 +72,8 @@ const steps = [
 .personal-cabinet-progress-card li {
   position: relative;
   display: grid;
-  width: 108px;
-  flex: none;
+  min-width: 0;
+  flex: 1;
   justify-items: center;
   gap: 8px;
   color: var(--pc-ink-muted);
@@ -77,10 +83,19 @@ const steps = [
   position: absolute;
   top: 17px;
   left: 50%;
-  width: 159px;
+  width: 100%;
   height: 2px;
   background: var(--pc-line);
   content: '';
+}
+
+.personal-cabinet-progress-card--fixed li {
+  width: 108px;
+  flex: none;
+}
+
+.personal-cabinet-progress-card--fixed li:not(:last-child)::after {
+  width: 159px;
 }
 
 .personal-cabinet-progress-card li.complete:not(:last-child)::after {
@@ -115,11 +130,14 @@ const steps = [
     padding: 16px;
   }
 
-  .personal-cabinet-progress-card li {
-    width: 20%;
+  .personal-cabinet-progress-card li,
+  .personal-cabinet-progress-card--fixed li {
+    width: auto;
+    flex: 1;
   }
 
-  .personal-cabinet-progress-card li:not(:last-child)::after {
+  .personal-cabinet-progress-card li:not(:last-child)::after,
+  .personal-cabinet-progress-card--fixed li:not(:last-child)::after {
     top: 13px;
     width: 100%;
   }

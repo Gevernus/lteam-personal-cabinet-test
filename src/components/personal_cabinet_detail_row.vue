@@ -28,6 +28,7 @@ const handleCopy = () => emit('copy', { label: props.label, value: props.value }
     </dl>
     <PersonalCabinetIconButton
       v-if="props.copyLabel"
+      class="personal-cabinet-detail-row__copy"
       :label="props.copyLabel"
       icon="copy"
       quiet
@@ -84,7 +85,7 @@ const handleCopy = () => emit('copy', { label: props.label, value: props.value }
   line-height: 21px;
 }
 
-.personal-cabinet-detail-row :deep(.personal-cabinet-icon-button) {
+.personal-cabinet-detail-row__copy {
   width: 20px;
   height: 20px;
   margin-top: 10px;
@@ -115,7 +116,7 @@ const handleCopy = () => emit('copy', { label: props.label, value: props.value }
     line-height: 15px;
   }
 
-  .personal-cabinet-detail-row :deep(.personal-cabinet-icon-button) {
+  .personal-cabinet-detail-row__copy {
     margin-top: 6px;
   }
 }

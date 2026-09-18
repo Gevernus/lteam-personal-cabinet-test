@@ -1,18 +1,38 @@
 import { readdir, readFile } from 'node:fs/promises'
 import { basename, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const componentDirectory = new URL('../src/components/', import.meta.url)
-const componentNames = (await readdir(componentDirectory)).filter((name) => name.endsWith('.vue'))
+const sourceDirectory = fileURLToPath(new URL('../src/', import.meta.url))
 const failures = []
 
+const collectVueFiles = async (directory) => {
+  const entries = await readdir(directory, { withFileTypes: true })
+  const nested = await Promise.all(
+    entries.map(async (entry) => {
+      const path = join(directory, entry.name)
+      if (entry.isDirectory()) return collectVueFiles(path)
+      return entry.isFile() && entry.name.endsWith('.vue') ? [path] : []
+    }),
+  )
+  return nested.flat()
+}
+
+const componentPaths = await collectVueFiles(sourceDirectory)
 const countMatches = (source, pattern) => source.match(pattern)?.length ?? 0
+const countPhysicalLines = (source) => {
+  const normalized = source.replaceAll('\r\n', '\n').replace(/\n$/, '')
+  return normalized.length === 0 ? 0 : normalized.split('\n').length
+}
 
-for (const componentName of componentNames) {
-  const componentPath = join(componentDirectory.pathname, componentName)
+for (const componentPath of componentPaths) {
+  const componentName = basename(componentPath)
   const source = await readFile(componentPath, 'utf8')
-  const lines = source.split('\n').length
+  const lines = countPhysicalLines(source)
 
-  if (!/^personal_cabinet_[a-z0-9_]+\.vue$/.test(basename(componentName))) {
+  if (
+    componentName !== 'App.vue' &&
+    !/^personal_cabinet_[a-z0-9_]+\.vue$/.test(componentName)
+  ) {
     failures.push(`${componentName}: component filename must use the domain prefix`)
   }
   if (lines > 300) {
@@ -40,4 +60,4 @@ if (failures.length > 0) {
   process.exit(1)
 }
 
-console.log(`Quality checks passed for ${componentNames.length} Vue components.`)
+console.log(`Quality checks passed for ${componentPaths.length} Vue components.`)

@@ -14,22 +14,26 @@ npm install --save-dev vite @vitejs/plugin-vue laravel-vite-plugin
 Скопировать:
 
 ```text
+src/App.vue      → resources/js/personal-cabinet/App.vue
 src/components/  → resources/js/personal-cabinet/components/
+src/data/        → resources/js/personal-cabinet/data/
 src/utils/       → resources/js/personal-cabinet/utils/
-src/assets/main.css → resources/css/personal-cabinet.css
+src/assets/main.css → resources/js/personal-cabinet/assets/main.css
+src/assets/fonts/   → resources/js/personal-cabinet/assets/fonts/
+src/assets/marco_rossi_avatar.jpg → resources/js/personal-cabinet/assets/marco_rossi_avatar.jpg
 ```
 
 Создать `resources/js/personal-cabinet.js`:
 
 ```js
 import { createApp } from 'vue'
-import PersonalCabinetFlow from './personal-cabinet/components/personal_cabinet_flow.vue'
-import '../css/personal-cabinet.css'
+import PersonalCabinetApp from './personal-cabinet/App.vue'
+import './personal-cabinet/assets/main.css'
 
 const root = document.querySelector('#personal-cabinet-app')
 
 if (root) {
-  createApp(PersonalCabinetFlow).mount(root)
+  createApp(PersonalCabinetApp).mount(root)
 }
 ```
 
@@ -60,6 +64,12 @@ export default defineConfig({
 @vite('resources/js/personal-cabinet.js')
 ```
 
-## 5. Замена demo-данных
+## 5. CSS isolation
 
-Сейчас данные находятся внутри презентационных компонентов. Для production-интеграции их следует передать props из Blade либо загрузить через application API. State transition остаётся внутри `personal_cabinet_flow.vue`; сетевое подтверждение платежа подключается в `handleConfirm` через отдельный service/adaptor, не внутри visual-компонентов.
+`main.css` ограничен корневым классом `.personal-cabinet-app` и не меняет `html`, `body` или элементы существующего Blade-приложения. Файл `src/assets/demo.css` нужен только standalone-preview и в Laravel не переносится.
+
+## 6. Замена demo-данных
+
+Demo-модель собрана в `data/personal_cabinet_demo.js`; visual-компоненты получают пользователя, баланс, шаги, комиссию и реквизиты через props. Для production замените импорт модели в `App.vue` на данные Blade/API либо передайте объект в `PersonalCabinetFlow` из собственного composition root.
+
+State transition остаётся внутри `personal_cabinet_flow.vue`; сетевое подтверждение платежа подключается через service/adaptor, не внутри visual-компонентов.

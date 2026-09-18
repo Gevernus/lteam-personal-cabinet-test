@@ -33,15 +33,27 @@ Scope: финальный pixel-perfect pass
 
 Добавлены отдельные кейсы для rejected Clipboard API и полностью отсутствующего API. В обоих случаях dialog остаётся рабочим и показывает manual-copy fallback.
 
+### P1 — компоненты содержали demo-данные вместо reusable API
+
+Независимый requirement-review выявил, что кнопки и shell были переиспользуемыми, но пользователь, баланс, комиссия, реквизиты, navigation и checklist оставались зашиты в presentation-компонентах. Demo-модель перенесена в `src/data/personal_cabinet_demo.js`; visual-компоненты теперь получают данные через props. Добавлен end-to-end component contract с альтернативным пользователем, суммой и реквизитами.
+
+### P1 — Laravel guide не переносил все assets
+
+Инструкция не включала fonts/avatar, а основной CSS затрагивал глобальные `html/body`. Assets добавлены в карту переноса, styles изолированы `.personal-cabinet-app`, standalone reset вынесен в `demo.css`. Добавлен реальный relocated Vite build в `npm run test:laravel`.
+
+### P1 — quality guard покрывал не все SFC
+
+Guard сканировал только верхний уровень `src/components` и пропускал `App.vue`; line counter учитывал завершающий newline как дополнительную строку. Обход сделан рекурсивным по всему `src`, а подсчёт нормализован.
+
 ### P1 — mutation runner давал false survivors
 
 Vitest/Stryker загружал статические ESM exports до активации мутанта, из-за чего вручную воспроизводимые мутации ошибочно считались выжившими. Mutation harness перенесён на официальный Mocha runner; manual mutation предварительно доказала, что property-тест падает. Итоговый score — 100% (56/56 killed).
 
 ## Результат review
 
-- Blocking findings: **0**.
-- Каждый Vue component: отдельный `personal_cabinet_*.vue` файл.
-- Максимальный размер компонента: **233 строки** при лимите 300.
+- Code blocking findings: **0**.
+- Каждый domain-component: отдельный `personal_cabinet_*.vue` файл; `App.vue` — composition root.
+- Максимальный размер компонента: **265 строк** при лимите 300.
 - Inline CSS/JS: **не найдено**.
 - Production dependencies audit: **0 high/critical vulnerabilities**.
 
@@ -49,4 +61,4 @@ Vitest/Stryker загружал статические ESM exports до акти
 
 - Это frontend-demo: реальный API подтверждения платежа не был дан в ТЗ.
 - Exact Figma frame exports доступны только через canvas render; для воспроизводимости их reviewed 100% captures сохранены в `comparison/`.
-- Git remote и Vercel credentials отсутствуют локально; репозиторий и `vercel.json` полностью подготовлены, но публикация требует аккаунта владельца.
+- Буквальное требование «отправить Git + Vercel» пока остаётся внешним BLOCKER: Git remote, Vercel credentials и preview URL отсутствуют. Репозиторий и `vercel.json` подготовлены.

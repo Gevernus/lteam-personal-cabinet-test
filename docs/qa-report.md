@@ -6,17 +6,18 @@
 
 | Gate | Результат |
 |---|---|
-| Static component policy | 22/22 components passed |
-| Test-quality/vacuous scan | 5/5 test files passed |
-| Vitest | 23/23 passed |
+| Static component policy | 24/24 Vue components passed |
+| Test-quality/vacuous scan | 6/6 test files passed |
+| Vitest | 27/27 passed |
 | Playwright | 4/4 passed |
 | Accessibility | 3 states, 0 axe violations |
 | Production build | passed |
+| Relocated Laravel-style build | passed |
 | Runtime dependency audit | 0 vulnerabilities |
-| Statement coverage | 98.92% |
-| Branch coverage | 90.73% |
-| Function coverage | 97.56% |
-| Line coverage | 98.74% |
+| Statement coverage | 99.09% |
+| Branch coverage | 88.38% |
+| Function coverage | 98.03% |
+| Line coverage | 98.96% |
 | Mutation score | 100% — 56/56 killed |
 | Mutation test strength | 100% |
 

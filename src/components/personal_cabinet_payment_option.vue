@@ -1,10 +1,26 @@
 <script setup>
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
-defineProps({
+const props = defineProps({
   selected: {
     type: Boolean,
-    default: true,
+    default: false,
+  },
+  icon: {
+    type: String,
+    default: 'card',
+  },
+  title: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  selectedLabel: {
+    type: String,
+    default: 'Metodo di pagamento selezionato',
   },
 })
 </script>
@@ -12,14 +28,18 @@ defineProps({
 <template>
   <div class="personal-cabinet-payment-option">
     <span class="personal-cabinet-payment-option__icon">
-      <PersonalCabinetIcon name="card" :size="20" />
+      <PersonalCabinetIcon
+        class="personal-cabinet-payment-option__glyph"
+        :name="props.icon"
+        :size="20"
+      />
     </span>
     <div>
-      <strong>Pagamento servizi</strong>
-      <p>Per proseguire con la procedura di accredito del finanziamento è necessario effettuare il pagamento dei servizi.</p>
+      <strong>{{ props.title }}</strong>
+      <p>{{ props.description }}</p>
     </div>
-    <span class="personal-cabinet-payment-option__radio" :class="{ selected }" aria-hidden="true"></span>
-    <span class="sr-only">Metodo di pagamento selezionato</span>
+    <span class="personal-cabinet-payment-option__radio" :class="{ selected: props.selected }" aria-hidden="true"></span>
+    <span v-if="props.selected" class="sr-only">{{ props.selectedLabel }}</span>
   </div>
 </template>
 
@@ -74,7 +94,7 @@ defineProps({
     border-radius: 4.4px;
   }
 
-  .personal-cabinet-payment-option__icon :deep(svg) {
+  .personal-cabinet-payment-option__glyph {
     width: 11px;
     height: 11px;
   }

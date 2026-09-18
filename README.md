@@ -12,7 +12,7 @@
 - подтверждение и повторное открытие сценария;
 - keyboard/focus management, `aria-live`, reduced motion;
 - Vue Composition API (`<script setup>`);
-- 22 переиспользуемых domain-component, каждый меньше 300 строк;
+- 23 переиспользуемых domain-component, каждый меньше 300 строк;
 - без inline CSS, native inline JS handlers и `v-html`;
 - Vercel-конфигурация и инструкция для Laravel Vite.
 
@@ -39,6 +39,7 @@ npm test                 # component, contract, property-based, accessibility
 npm run test:coverage   # V8 coverage thresholds
 npm run test:e2e        # Chrome responsive + visual regression
 npm run test:mutation   # Stryker mutation testing
+npm run test:laravel    # relocated Laravel-style Vite build
 npm run quality         # naming, line limit, inline-code policy
 npm run validate        # основной полный прогон без mutation
 ```
@@ -49,8 +50,9 @@ Visual baselines находятся в `e2e/personal_cabinet_visual.spec.js-snap
 
 ```text
 src/
-├── assets/main.css
+├── assets/            scoped CSS, exact fonts, avatar
 ├── components/personal_cabinet_*.vue
+├── data/personal_cabinet_demo.js
 ├── utils/personal_cabinet_money.js
 ├── App.vue
 └── main.js
@@ -68,6 +70,7 @@ docs/               спека, review и интеграция
 - [Выбранный экран](docs/selected-screen.md)
 - [Требования из переписки](docs/brief.md)
 - [Code review](docs/review.md)
+- [Independent requirement reviews](docs/reviews/requirements/README.md)
 - [Laravel integration](docs/laravel-integration.md)
 - [QA report](docs/qa-report.md)
 - [Figma / implementation pixel comparison](comparison/README.md)

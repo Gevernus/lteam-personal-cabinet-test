@@ -3,17 +3,23 @@ const props = defineProps({
   current: {
     type: Number,
     required: true,
-    validator: (value) => value >= 1 && value <= 3,
+  },
+  steps: {
+    type: Array,
+    required: true,
+    validator: (value) => value.length > 0,
+  },
+  ariaLabel: {
+    type: String,
+    required: true,
   },
 })
-
-const steps = ['IBAN', 'COMMISSIONE', 'COORDINATE']
 </script>
 
 <template>
-  <ol class="personal-cabinet-stepper" aria-label="Avanzamento pagamento">
+  <ol class="personal-cabinet-stepper" :aria-label="props.ariaLabel">
     <li
-      v-for="(step, index) in steps"
+      v-for="(step, index) in props.steps"
       :key="step"
       :class="{ 'personal-cabinet-stepper__step--current': index + 1 === props.current }"
       :aria-current="index + 1 === props.current ? 'step' : undefined"
@@ -25,20 +31,21 @@ const steps = ['IBAN', 'COMMISSIONE', 'COORDINATE']
 
 <style scoped>
 .personal-cabinet-stepper {
-  display: grid;
+  display: flex;
   height: 29px;
   overflow: hidden;
   margin: 0;
   border-radius: 8px;
   padding: 0;
   gap: 2px;
-  grid-template-columns: repeat(3, 1fr);
   list-style: none;
 }
 
 .personal-cabinet-stepper li {
   display: grid;
   height: 29px;
+  min-width: 0;
+  flex: 1;
   place-items: center;
   background: #f4f4f5;
   color: var(--pc-ink-muted);

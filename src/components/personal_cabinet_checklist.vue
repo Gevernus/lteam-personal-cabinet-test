@@ -1,26 +1,32 @@
 <script setup>
+import { useId } from 'vue'
 import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
-const items = [
-  { title: 'Simulazione completata', status: 'Completato', icon: 'chart', done: true },
-  { title: 'Credito approvato', status: 'Completato', icon: 'shield-check', done: true },
-  { title: 'Account creato', status: 'Completato', icon: 'user', done: true },
-  { title: 'Documenti caricati', status: 'Step iniziato', icon: 'upload', done: true },
-  { title: 'Contratto firmato', status: 'In attesa', icon: 'signature', done: false },
-]
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
+
+const titleId = useId()
 </script>
 
 <template>
-  <section class="personal-cabinet-checklist" aria-labelledby="checklist-title">
+  <section
+    class="personal-cabinet-checklist"
+    :class="{ 'personal-cabinet-checklist--fixed': props.model.fixedLayout }"
+    :aria-labelledby="titleId"
+  >
     <div class="personal-cabinet-checklist__header">
       <div>
-        <p>COMPLETA TUTTI GLI STEP</p>
-        <h2 id="checklist-title">Per il prelievo dei fondi, completa tutti gli step</h2>
+        <p>{{ props.model.eyebrow }}</p>
+        <h2 :id="titleId">{{ props.model.title }}</h2>
       </div>
-      <b>3 / 5 completati</b>
+      <b>{{ props.model.completionLabel }}</b>
     </div>
     <ul>
-      <li v-for="item in items" :key="item.title">
+      <li v-for="item in props.model.items" :key="item.title">
         <span class="personal-cabinet-checklist__icon">
           <PersonalCabinetIcon :name="item.icon" :size="17" />
         </span>
@@ -37,14 +43,17 @@ const items = [
       </li>
     </ul>
     <div class="personal-cabinet-checklist__progress" aria-hidden="true">
-      <i></i><i></i><i></i><i></i><i></i>
+      <i
+        v-for="(_, index) in props.model.items"
+        :key="index"
+        :class="{ 'personal-cabinet-checklist__progress--complete': index < props.model.completedSegments }"
+      ></i>
     </div>
   </section>
 </template>
 
 <style scoped>
 .personal-cabinet-checklist {
-  height: 516px;
   overflow: hidden;
   border: 1px solid var(--pc-line);
   border-radius: 16px;
@@ -94,7 +103,7 @@ const items = [
 
 .personal-cabinet-checklist li {
   display: grid;
-  height: 76px;
+  min-height: 76px;
   align-items: center;
   gap: 16px;
   padding: 12px 24px;
@@ -116,14 +125,23 @@ const items = [
 }
 
 .personal-cabinet-checklist__progress i {
-  width: 80px;
+  width: auto;
   height: 6px;
+  flex: 1;
   border-radius: 99px;
   background: var(--pc-line);
 }
 
-.personal-cabinet-checklist__progress i:nth-child(-n + 3) {
-  background: var(--pc-primary);
+.personal-cabinet-checklist--fixed {
+  height: 516px;
+}
+
+.personal-cabinet-checklist--fixed li {
+  height: 76px;
+}
+
+.personal-cabinet-checklist__progress--complete {
+  background: var(--pc-primary) !important;
 }
 
 .personal-cabinet-checklist__icon,

@@ -1,9 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, useId } from 'vue'
 import PersonalCabinetButton from './personal_cabinet_button.vue'
+
+const props = defineProps({
+  model: {
+    type: Object,
+    required: true,
+  },
+})
 
 const emit = defineEmits(['open-commission'])
 const button = ref(null)
+const titleId = useId()
 
 const handleOpen = () => emit('open-commission')
 const focusLauncher = () => button.value?.focus()
@@ -12,15 +20,21 @@ defineExpose({ focusLauncher })
 </script>
 
 <template>
-  <section class="personal-cabinet-balance-card" aria-labelledby="balance-title">
-    <p>Il tuo saldo</p>
-    <h2 id="balance-title">Importo approvato dai nostri partner</h2>
-    <strong>€ 12 000</strong>
-    <span>Prestito personale • TAN 3,8%</span>
-    <PersonalCabinetButton ref="button" variant="secondary" block @click="handleOpen">
-      Vai alla commissione
+  <section class="personal-cabinet-balance-card" :aria-labelledby="titleId">
+    <p>{{ props.model.eyebrow }}</p>
+    <h2 :id="titleId">{{ props.model.title }}</h2>
+    <strong>{{ props.model.amount }}</strong>
+    <span>{{ props.model.description }}</span>
+    <PersonalCabinetButton
+      ref="button"
+      class="personal-cabinet-balance-card__button"
+      variant="secondary"
+      block
+      @click="handleOpen"
+    >
+      {{ props.model.cta }}
     </PersonalCabinetButton>
-    <small>Fondi disponibili dopo l'approvazione dei documenti</small>
+    <small>{{ props.model.footnote }}</small>
   </section>
 </template>
 
@@ -82,7 +96,7 @@ defineExpose({ focusLauncher })
   line-height: 17px;
 }
 
-.personal-cabinet-balance-card :deep(.personal-cabinet-button--secondary) {
+.personal-cabinet-balance-card__button {
   position: absolute;
   top: 205px;
   left: 32px;
@@ -109,7 +123,7 @@ defineExpose({ focusLauncher })
     height: 340px;
   }
 
-  .personal-cabinet-balance-card :deep(.personal-cabinet-button--secondary) {
+  .personal-cabinet-balance-card__button {
     width: calc(100% - 64px);
   }
 }

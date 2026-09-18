@@ -22,7 +22,7 @@ const links = [
           href="#main-content"
           :aria-current="link.active ? 'page' : undefined"
         >
-          <PersonalCabinetIcon :name="link.icon" :size="15" />
+          <PersonalCabinetIcon :name="link.icon" :size="18" />
           <span class="personal-cabinet-header__desktop-label">{{ link.label }}</span>
           <span class="personal-cabinet-header__mobile-label">{{ link.shortLabel }}</span>
         </a>

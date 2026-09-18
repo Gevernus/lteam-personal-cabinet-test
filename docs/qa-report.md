@@ -13,10 +13,10 @@
 | Accessibility | 3 states, 0 axe violations |
 | Production build | passed |
 | Runtime dependency audit | 0 vulnerabilities |
-| Statement coverage | 98.91% |
-| Branch coverage | 89.50% |
+| Statement coverage | 98.92% |
+| Branch coverage | 90.73% |
 | Function coverage | 97.56% |
-| Line coverage | 98.73% |
+| Line coverage | 98.74% |
 | Mutation score | 100% — 56/56 killed |
 | Mutation test strength | 100% |
 

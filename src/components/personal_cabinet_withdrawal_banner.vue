@@ -5,7 +5,7 @@ import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 <template>
   <section class="personal-cabinet-withdrawal-banner" aria-label="Requisiti per il prelievo">
     <span class="personal-cabinet-withdrawal-banner__icon">
-      <PersonalCabinetIcon name="lock" :size="24" />
+      <PersonalCabinetIcon name="lock" :size="20" />
     </span>
     <div>
       <strong>Per il prelievo dei fondi, completa tutti gli step</strong>

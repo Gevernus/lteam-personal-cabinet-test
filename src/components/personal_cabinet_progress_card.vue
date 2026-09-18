@@ -19,7 +19,7 @@ const steps = [
     <ol>
       <li v-for="step in steps" :key="step.label" :class="{ complete: step.complete }">
         <span>
-          <PersonalCabinetIcon v-if="step.complete" name="check" :size="17" />
+          <PersonalCabinetIcon v-if="step.complete" name="check-mark" :size="12" />
         </span>
         <small>{{ step.label }}</small>
       </li>

@@ -3,10 +3,10 @@ import PersonalCabinetIcon from './personal_cabinet_icon.vue'
 
 const items = [
   { title: 'Simulazione completata', status: 'Completato', icon: 'chart', done: true },
-  { title: 'Credito approvato', status: 'Completato', icon: 'lock', done: true },
+  { title: 'Credito approvato', status: 'Completato', icon: 'shield-check', done: true },
   { title: 'Account creato', status: 'Completato', icon: 'user', done: true },
-  { title: 'Documenti caricati', status: 'Step iniziato', icon: 'document', done: true },
-  { title: 'Contratto firmato', status: 'In attesa', icon: 'document', done: false },
+  { title: 'Documenti caricati', status: 'Step iniziato', icon: 'upload', done: true },
+  { title: 'Contratto firmato', status: 'In attesa', icon: 'signature', done: false },
 ]
 </script>
 
@@ -28,7 +28,12 @@ const items = [
           <strong>{{ item.title }}</strong>
           <small>{{ item.status }}</small>
         </div>
-        <PersonalCabinetIcon :name="item.done ? 'check' : 'arrow-right'" :size="18" />
+        <span
+          class="personal-cabinet-checklist__status"
+          :class="{ 'personal-cabinet-checklist__status--done': item.done }"
+        >
+          <PersonalCabinetIcon :name="item.done ? 'check-mark' : 'arrow-right'" :size="item.done ? 10 : 12" />
+        </span>
       </li>
     </ul>
     <div class="personal-cabinet-checklist__progress" aria-hidden="true">
@@ -91,7 +96,7 @@ const items = [
   display: grid;
   height: 76px;
   align-items: center;
-  gap: 11px;
+  gap: 16px;
   padding: 12px 24px;
   border-bottom: 1px solid var(--pc-line-soft);
   grid-template-columns: auto 1fr auto;
@@ -121,12 +126,30 @@ const items = [
   background: var(--pc-primary);
 }
 
-.personal-cabinet-checklist__icon {
+.personal-cabinet-checklist__icon,
+.personal-cabinet-checklist__status {
   display: grid;
-  width: 32px;
-  height: 32px;
   place-items: center;
   border-radius: 50%;
+}
+
+.personal-cabinet-checklist__icon {
+  width: 44px;
+  height: 44px;
+  background: var(--pc-primary);
+  color: #ffffff;
+}
+
+.personal-cabinet-checklist__status {
+  width: 32px;
+  height: 32px;
+  background: var(--pc-surface-soft);
+  color: var(--pc-ink-muted);
+}
+
+.personal-cabinet-checklist__status--done {
+  width: 28px;
+  height: 28px;
   background: var(--pc-primary);
   color: #ffffff;
 }
@@ -148,6 +171,25 @@ const items = [
 }
 
 @media (max-width: 767px) {
+  .personal-cabinet-checklist li {
+    gap: 12px;
+  }
+
+  .personal-cabinet-checklist__icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .personal-cabinet-checklist__status {
+    width: 28px;
+    height: 28px;
+  }
+
+  .personal-cabinet-checklist__status--done {
+    width: 22px;
+    height: 22px;
+  }
+
   .personal-cabinet-checklist__header {
     align-items: flex-start;
     gap: 10px;
